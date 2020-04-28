@@ -1,25 +1,32 @@
-# README
+## ユーザーテーブル
+| 	カラム名  |  	データ型    |  
+| :------------: | :------------: | 
+|    ユーザーID    |    string      |  
+|   ユーザー名 	|     string      |
+|   メールアドレス  |     string      |
+|   パスワード     |     string      |
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## タスクテーブル
+|    カラム名    |      データ型    |  
+| :------------: | :------------: | 
+|    タスクID     |    string      |  
+|   タスク詳細 	|     text      |
+|   ステータス 	|     string     |
+|   ユーザーID（FK） |     string   |
+|   ラベルID（FK）  |     string   |
 
-* Ruby version
 
-* System dependencies
+## ラベルテーブル
+|    カラム名    |  	データ型    |  
+| :------------: | :------------: | 
+|    ラベルID    |    string      |  
+|    ラベル名	|    string      |
+|   タスクID（FK） |     string   |
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# manyo_kadai
+## タスク&ユーザー中間テーブル
+|    カラム名    |  	データ型    |  
+| :------------: | :------------: | 
+|    ラベルID    |    string      |  
+|   タスクID（FK）|    string      |
