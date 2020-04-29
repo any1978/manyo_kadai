@@ -1,16 +1,20 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
-  background do
-    # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
-    FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
-    FactoryBot.create(:second_task, name: '付け加えた名前３', description: '付け加えたコンテント')
-  end
+  # before do
+  #   # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
+  #   FactoryBot.create(:task)
+  #   FactoryBot.create(:second_task)
+  #   FactoryBot.create(:second_task, name: '付け加えた名前３', description: '付け加えたコンテント')
+  # end
   before do
+    # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
+    @task1 = FactoryBot.create(:task)
+    @task2 = FactoryBot.create(:second_task)
+    @task3 = FactoryBot.create(:second_task, name: '付け加えた名前３', description: '付け加えたコンテント')
     # 「タスク一覧画面」や「タスク詳細画面」などそれぞれのテストケースで、before内のコードが実行される
     # 各テストで使用するタスクを1件作成する
     # 作成したタスクオブジェクトを各テストケースで呼び出せるようにインスタンス変数に代入
-    @task = FactoryBot.create(:task, name: 'task')
+    @task4 = FactoryBot.create(:task, name: 'task')
   end
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
@@ -24,6 +28,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         new_task = FactoryBot.create(:task, name: 'new_task')
         visit tasks_path
         task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
+        # binding.irb
         expect(task_list[0]).to have_content 'new_task'
         expect(task_list[1]).to have_content 'task'
       end
