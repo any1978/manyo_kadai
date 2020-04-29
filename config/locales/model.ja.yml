@@ -5,8 +5,8 @@ ja:
       user: ユーザー
     attributes:
       task:
-        name: タイトル
-        description: 詳細
+        name: 
+        description: 
       user:
         title: タイトル
         name: 名前

@@ -8,13 +8,13 @@ RSpec.describe 'タスク管理機能', type: :system do
   # end
   before do
     # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
-    @task1 = FactoryBot.create(:task)
-    @task2 = FactoryBot.create(:second_task)
-    @task3 = FactoryBot.create(:second_task, name: '付け加えた名前３', description: '付け加えたコンテント')
+    @task1 = create(:task)
+    @task2 = create(:second_task)
+    @task3 = create(:second_task, name: '付け加えた名前３', description: '付け加えたコンテント')
     # 「タスク一覧画面」や「タスク詳細画面」などそれぞれのテストケースで、before内のコードが実行される
     # 各テストで使用するタスクを1件作成する
     # 作成したタスクオブジェクトを各テストケースで呼び出せるようにインスタンス変数に代入
-    @task4 = FactoryBot.create(:task, name: 'task')
+    @task4 = create(:task, name: 'task')
   end
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
@@ -25,7 +25,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '複数のタスクを作成した場合' do
       it 'タスクが作成日時の降順に並んでいる' do
-        new_task = FactoryBot.create(:task, name: 'new_task')
+        new_task = create(:task, name: 'new_task')
         visit tasks_path
         task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
         # binding.irb
@@ -40,7 +40,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in "Name", with: '玉ねぎ買う'
         fill_in "Description", with: '2個買う'
-        click_button 'Create Task'
+        click_button '登録する'
         expect(page).to have_content '玉ねぎ買う'
       end
     end
