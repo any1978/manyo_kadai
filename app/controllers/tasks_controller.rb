@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
+
+  helper_method :sort_column, :sort_direction
+
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(sort_column + ' ' + sort_direction)
+    # @transactions = Transaction.paginate(page: params[:page], per_page: 8).order(sort_column + ' ' + sort_direction)
   end
 
   def show
@@ -40,5 +44,13 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:name, :description)
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+  end
+
+  def sort_column
+    Task.column_names.include?(params[:sort]) ? params[:sort] : "end_date"
   end
 end
