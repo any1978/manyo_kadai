@@ -9,8 +9,18 @@ class Task < ApplicationRecord
   validates :end_date, presence: true
   validates :status, presence: true
 
-  def self.search(search)
-    return Task.all unless search
-    Task.where(['name LIKE ?', "%#{search}%"])
-  end
+  # def self.search(search)
+  #   return Task.all unless search
+  #   Task.where(['name LIKE ?', "%#{search}%"])
+  # end
+
+  # enum gender: { unknown: 0, male: 1, female: 2, other: 9 }
+  # ユーザー名による絞り込み
+  scope :get_by_name, ->(name) {
+    where("name like ?", "%#{name}%")
+  }
+  # 性別による絞り込み
+  scope :get_by_status, ->(status) {
+    where(status: status)
+  }
 end

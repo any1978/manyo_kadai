@@ -3,11 +3,24 @@ h1 タスク一覧
 
 = link_to '新規登録', new_task_path, class: 'btn btn-primary'
 
-p タイトル検索
-= form_tag(search_tasks_path,:method => 'get') do
-  = text_field_tag :search
-  = submit_tag 'Search', :name => nil
-    
+/ p タイトル&ステータス検索
+/ = form_tag(search_tasks_path, method: 'get') do
+/   = text_field_tag :search
+/ = form_tag(search_tasks_path, method: "get") do
+/   = select_tag "status", options_for_select([["未着手", "未着手"],["着手中","着手中"],["完了","完了"]])
+/   = submit_tag 'Search', name: nil
+/   / = @submits_searched
+
+
+div
+  = form_tag(tasks_path, method: "get") do
+    = label_tag :name, "タイトル"
+    = text_field_tag :name, params[:name]
+    = label_tag :name, "状態"
+    = select_tag :status, options_for_select([["未着手", "未着手"],["着手中","着手中"],["完了","完了"]])
+    = submit_tag "検索"
+
+
 .mb-3
 table.table.table-hover
   thead.thead-default

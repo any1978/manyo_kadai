@@ -11,6 +11,15 @@ class TasksController < ApplicationController
       @tasks = Task.all.order(created_at: :desc)
     end
     # @transactions = Transaction.paginate(page: params[:page], per_page: 8).order(sort_column + ' ' + sort_direction)
+    
+    if params[:name].present?
+      @tasks = @tasks.get_by_name params[:name]
+    end
+    if params[:status].present?
+      @tasks = @tasks.get_by_status params[:status]
+    end
+  
+  
   end
 
   def show
@@ -46,11 +55,11 @@ class TasksController < ApplicationController
     redirect_to tasks_url, notice: "タスク「#{task.name}」を削除しました。"
   end
 
-  def search
-    # binding.irb
-    @tasks = Task.search(params[:search])
-    render :index
-  end
+  # def search
+  #   # binding.irb
+  #   @tasks = Task.search(params[:search])
+  #   render :index
+  # end
 
   private
 
