@@ -20,6 +20,9 @@
     = f.date_field :end_date
     / = date_field_tag 'date', '01/01/2014'
       / input#date name="end_date" type="date" value="01/01/2014" /
+    .form-group
+    = f.label :status
+    = f.select :status, ["未着手","着手中","完了"]
   = f.submit nil, class: 'btn btn-primary'
 
 

@@ -3,6 +3,11 @@ h1 タスク一覧
 
 = link_to '新規登録', new_task_path, class: 'btn btn-primary'
 
+p タイトル検索
+= form_tag(search_tasks_path,:method => 'get') do
+  = text_field_tag :search
+  = submit_tag 'Search', :name => nil
+    
 .mb-3
 table.table.table-hover
   thead.thead-default
@@ -13,6 +18,7 @@ table.table.table-hover
         = Task.human_attribute_name(:end_date)
         = sort_asc("end_date")
         = sort_desc("end_date")
+      th= Task.human_attribute_name(:status)
 
   tbody
     - @tasks.each do |task|
@@ -20,6 +26,7 @@ table.table.table-hover
         td.task_row= link_to task.name, task
         td= task.created_at
         td= task.end_date
+        td= task.status
         td
           = link_to '編集', edit_task_path(task), class: 'btn btn-primary mr-3'
           = link_to '削除', task, method: :delete, data: { confirm: "タスク「#{task.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'

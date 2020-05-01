@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
       # @tasks = Task.all.order(created_at: :desc)
@@ -13,7 +14,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
   end
 
   def new
@@ -21,7 +21,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
   end
 
   def create
@@ -34,9 +33,11 @@ class TasksController < ApplicationController
   end
 
   def update
-    task = Task.find(params[:id])
-    task.update!(task_params)
-    redirect_to tasks_url, notice: "タスク「#{task.name}」を更新しました。"
+    if @task.update(task_params)
+      redirect_to tasks_path, notice: "タスク「#{@task.name}」を更新しました。"
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -45,10 +46,21 @@ class TasksController < ApplicationController
     redirect_to tasks_url, notice: "タスク「#{task.name}」を削除しました。"
   end
 
+  def search
+    # binding.irb
+    @tasks = Task.search(params[:search])
+    render :index
+  end
+
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :end_date)
+    params.require(:task).permit(:name, :description, :end_date, :status, :search)
+  end
+
+  def set_task
+    # binding.irb
+    @task = Task.find(params[:id])
   end
 
   def sort_direction

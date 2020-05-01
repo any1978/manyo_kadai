@@ -6,4 +6,11 @@ class Task < ApplicationRecord
   # Task.unscope(:end_date)
   validates :name, presence: true
   validates :description, presence: true
+  validates :end_date, presence: true
+  validates :status, presence: true
+
+  def self.search(search)
+    return Task.all unless search
+    Task.where(['name LIKE ?', "%#{search}%"])
+  end
 end
