@@ -1,9 +1,14 @@
 class TasksController < ApplicationController
-
   helper_method :sort_column, :sort_direction
 
   def index
-    @tasks = Task.all.order(sort_column + ' ' + sort_direction)
+      # @tasks = Task.all.order(created_at: :desc)
+      # @tasks = Task.except(:end_date)
+    if params[:sort && :direction]
+      @tasks = Task.all.order(sort_column + ' ' + sort_direction)
+    else
+      @tasks = Task.all.order(created_at: :desc)
+    end
     # @transactions = Transaction.paginate(page: params[:page], per_page: 8).order(sort_column + ' ' + sort_direction)
   end
 
