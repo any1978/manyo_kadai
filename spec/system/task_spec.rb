@@ -44,6 +44,18 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[0]).to have_content 'Factoryで作ったデフォルトのタイトル1'
       end
     end
+    context '検索をした場合' do
+      before do
+        FactoryBot.create(:task, title: "task")
+        FactoryBot.create(:second_task, title: "sample")
+      end
+      it "タイトルで検索できる" do
+        visit tasks_path
+        # タスクの検索欄に検索ワードを入力する (例: task)
+        # 検索ボタンを押す
+        expect(page).to have_content 'task'
+      end
+    end
   end
   describe 'タスク登録画面' do
     context '必要項目を入力して、createボタンを押した場合' do

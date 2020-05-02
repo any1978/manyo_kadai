@@ -8,6 +8,7 @@ class Task < ApplicationRecord
   validates :description, presence: true
   validates :end_date, presence: true
   validates :status, presence: true
+  validates :priority, presence: true
 
   # def self.search(search)
   #   return Task.all unless search
