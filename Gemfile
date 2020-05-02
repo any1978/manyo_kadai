@@ -43,6 +43,10 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'chromedriver-helper'
   gem 'launchy'
+  gem 'pry-rails'  # rails console(もしくは、rails c)でirbの代わりにpryを使われる
+  gem 'pry-doc'    # methodを表示
+  gem 'pry-byebug' # デバッグを実施(Ruby 2.0以降で動作する)
+  gem 'pry-stack_explorer' # スタックをたどれる
 end
 
 group :development do
@@ -68,3 +72,4 @@ gem 'slim-rails'
 gem 'html2slim'
 gem 'bootstrap'
 gem 'rails-i18n'
+gem 'enum_help'

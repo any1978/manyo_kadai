@@ -12,7 +12,8 @@ module TasksHelper
   end
 
   def sort_column
-    Task.column_names.include?(params[:column]) ? params[:column] : "end_date"
+    Task.column_names.include?(params[:column]) ? params[:column] : ("end_date" && "priority")
+    # Task.column_priorities.include?(params[:column]) ? params[:column] : "priority"
   end
 
 end

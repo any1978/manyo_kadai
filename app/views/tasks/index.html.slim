@@ -17,8 +17,20 @@ div
     = label_tag :name, "タイトル"
     = text_field_tag :name, params[:name]
     = label_tag :name, "状態"
-    = select_tag :status, options_for_select([["未着手", "未着手"],["着手中","着手中"],["完了","完了"]])
+    = select_tag :status, 
+      options_for_select([["未着手", "未着手"],["着手中","着手中"],["完了","完了"]]),
+      include_blank: true
+    / = f.hidden_field :search, value: 'true'
     = submit_tag "検索"
+
+/ div
+/   = form_with(model: Task.new, method: get, url: tasks_path do |f|
+/     = f.label :name_search, "タイトル検索"
+/     = f.text_field :name, class: 'form-control'
+/     = f.label :status_search, "状態検索"
+/     = f.status :status, Task.statuses.keys, class: 'form-control', include_blank: true, selected:''
+/     = f.hidden_field :search, value: 'true'
+/   = f.submit nil, class: 'btn btn-primary'
 
 
 .mb-3
@@ -32,6 +44,10 @@ table.table.table-hover
         = sort_asc("end_date")
         = sort_desc("end_date")
       th= Task.human_attribute_name(:status)
+      th
+        = Task.human_attribute_name(:priority)
+        = sort_asc("priority")
+        = sort_desc("priority")
 
   tbody
     - @tasks.each do |task|
@@ -40,6 +56,10 @@ table.table.table-hover
         td= task.created_at
         td= task.end_date
         td= task.status
+        / td= task.priority
+        / - binding.pry
+        td= t("enums.task.priority.#{task.priority}")
+        
         td
           = link_to '編集', edit_task_path(task), class: 'btn btn-primary mr-3'
           = link_to '削除', task, method: :delete, data: { confirm: "タスク「#{task.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'

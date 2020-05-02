@@ -17,6 +17,8 @@ class TasksController < ApplicationController
     end
     if params[:status].present?
       @tasks = @tasks.get_by_status params[:status]
+    elsif 
+      @tasks = @tasks.all
     end
   
   
@@ -64,7 +66,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :end_date, :status, :search)
+    params.require(:task).permit(:name, :description, :end_date, :status, :priority)
   end
 
   def set_task
@@ -77,6 +79,7 @@ class TasksController < ApplicationController
   end
 
   def sort_column
-    Task.column_names.include?(params[:sort]) ? params[:sort] : "end_date"
+    Task.column_names.include?(params[:sort]) ? params[:sort] : ("end_date" && "priority")
+    # Task.column_names.include?(params[:sort]) ? params[:sort] : "priority"
   end
 end

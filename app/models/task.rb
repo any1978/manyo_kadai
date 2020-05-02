@@ -14,13 +14,25 @@ class Task < ApplicationRecord
   #   Task.where(['name LIKE ?', "%#{search}%"])
   # end
 
-  # enum gender: { unknown: 0, male: 1, female: 2, other: 9 }
+  # enum status: { unknown: 0, 未着手: 1, 着手中: 2, 完了: 3 }
   # ユーザー名による絞り込み
   scope :get_by_name, ->(name) {
     where("name like ?", "%#{name}%")
   }
-  # 性別による絞り込み
+  # ステータスによる絞り込み
   scope :get_by_status, ->(status) {
     where(status: status)
   }
+
+  enum priority: [:high, :middle, :low]
+  # PRIORITIES = {
+  #   :High => 3,
+  #   :Middle  => 2,
+  #   :Low  => 1,
+  #   }
+    
+  #   def <=> (other)
+  #   PRIORITIES[self.priority] <=> PRIORITIES[other.priority]
+  #   end
+
 end
