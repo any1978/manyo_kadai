@@ -56,7 +56,8 @@ $ heroku open
 |   created_at(登録日時) 	|     datetime     |     false      |  
 |   updated_at(更新日時) 	|     datetime     |     false      |  
 |   end_date(終了期限) 	|     datetime     |    true     |  
-|   ステータス 	|     string     |     true     |  
+|   status(ステータス) 	|     string     |     true     |  
+|   priority(重要度)	|     string     |     true     |  
 |   ユーザーID（FK） |     string   |    false      |  
 |   ラベルID（FK）  |     string   |    false      |  
 
