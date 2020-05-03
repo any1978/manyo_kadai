@@ -16,7 +16,7 @@ div
   = form_tag(tasks_path, method: "get") do
     = label_tag :name, "タイトル"
     = text_field_tag :name, params[:name]
-    = label_tag :name, "状態"
+    = label_tag :status, "状態"
     = select_tag :status, 
       options_for_select([["未着手", "未着手"],["着手中","着手中"],["完了","完了"]]),
       include_blank: true

@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   # resources :tasks
   
   resources :tasks do
-    collection do
-      get 'search'
-    end
+    # collection do
+    #   get 'search'
+    # end
   end
 
 
