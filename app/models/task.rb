@@ -9,6 +9,11 @@ class Task < ApplicationRecord
   validates :end_date, presence: true
   validates :status, presence: true
   validates :priority, presence: true
+  validate :pretend_ago
+
+  def pretend_ago
+    errors.add(:end_date, ' 過去の日付は入力できません') if end_date.nil? || end_date < Date.today
+  end
 
   # def self.search(search)
   #   return Task.all unless search
@@ -25,7 +30,7 @@ class Task < ApplicationRecord
     where(status: status)
   }
 
-  enum priority: [:high, :middle, :low]
+  enum priority: %i[High Middle Low]
   # PRIORITIES = {
   #   :High => 3,
   #   :Middle  => 2,

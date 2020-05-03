@@ -6,7 +6,7 @@ FactoryBot.define do
     name { 'Factoryで作ったデフォルトのタイトル1' }
     description { 'Factoryで作ったデフォルトのコンテント１' }  
     end_date { 'Factoryで作ったデフォルトのDate1' }  
-    status { 'Factoryで作ったデフォルトのステータス1' } 
+    status { '着手中' } 
   end
   # 作成するテストデータの名前を「second_task」とします
   # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにしてください」と指定します）
@@ -14,6 +14,6 @@ FactoryBot.define do
     name { 'Factoryで作ったデフォルトのタイトル２' }
     description { 'Factoryで作ったデフォルトのコンテント２' }
     end_date { 'Factoryで作ったデフォルトのDate2' } 
-    status { 'Factoryで作ったデフォルトのステータス2' } 
+    status { '完了' } 
   end
 end

@@ -51,10 +51,10 @@ table.table.table-hover
 
   tbody
     - @tasks.each do |task|
-      tr
-        td.task_row= link_to task.name, task
-        td= task.created_at
-        td= task.end_date
+      tr.task_row
+        td= link_to task.name, task
+        td= task.created_at.to_s(:timeform)
+        td= task.end_date.to_s(:default)
         td= task.status
         / td= task.priority
         / - binding.pry
