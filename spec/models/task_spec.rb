@@ -18,21 +18,15 @@ RSpec.describe 'タスク管理機能', type: :model do
 
   context 'scopeメソッドで検索をした場合' do
     before do
-      FactoryBot.create(:task, name: "task1", description: '失敗テスト1', end_date: '2020-05-18 00:00:00 +0900', status: '着手中', priority: 0)
-      FactoryBot.create(:second_task, name: "task2", description: '失敗テスト2', end_date: '2020-05-20 00:00:00 +0900', status: '着手中', priority: 0)
+      create(:task, name: "task1", description: '失敗テスト1', end_date: '2020-05-18 00:00:00 +0900', status: '着手中', priority: 0)
+      create(:second_task, name: "task2", description: '失敗テスト2', end_date: '2020-05-20 00:00:00 +0900', status: '着手中', priority: 0)
       task_list = all('.task_row') 
     end
     it "scopeメソッドでタイトル検索ができる" do
-      # visit tasks_path
       tasks = Task.name
-      # tasks = @tasks.name_search("失敗タイトル")
-      # binding.pry
       expect(Task.get_by_name('task').count).to eq 2
     end
     it "scopeメソッドでステータス検索ができる" do
-      # tasks = Task.status
-      # expect(page).to have_select('状態', selected: '着手中')
-      # expect(tasks).to include task1, task2
       expect(Task.get_by_status('着手中').count).to eq 2
     end
     it "scopeメソッドでタイトルとステータスの両方が検索できる" do
