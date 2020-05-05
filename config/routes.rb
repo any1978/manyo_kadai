@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     # end
   end
 
-  namespace path :admin do
+  namespace :admin do
     resources :users
   end
 
