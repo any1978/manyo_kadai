@@ -19,7 +19,6 @@ RSpec.describe 'タスク管理機能', type: :system do
       it 'タスクが作成日時の降順に並んでいる' do
         new_task = create(:task, name: 'new_task', end_date: '2020/05/19', status: '着手中', priority: 'Low')
         visit tasks_path
-        task_list = all('.task_row') 
         expect(task_list[0]).to have_content 'new_task'
         expect(task_list[1]).to have_content '付け加えた名前4'
       end

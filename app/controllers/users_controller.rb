@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_correct_user, only:[:show, :create, :edit, :update, :destroy]
 
   # GET /users
   def index
@@ -9,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
+    @user.tasks = @user.tasks.page(params[:page]).per(7)
   end
 
   # GET /users/new
@@ -25,6 +27,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      session[:user_id] = @user.id
       redirect_to @user, notice: 'User was successfully created.'
     else
       render :new
@@ -54,7 +57,15 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email, :password,
+      params.require(:user).permit(:user_name, :email, :password,
                                   :password_confirmation)
+    end
+
+    def ensure_correct_user
+      @user = User.find(params[:id])
+      if current_user.id != @user.id
+        flash[:notice] = "権限がありません"
+        redirect_to tasks_path
+      end
     end
 end

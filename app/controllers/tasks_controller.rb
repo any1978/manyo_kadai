@@ -1,9 +1,10 @@
 class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_correct_user, only:[:show, :create, :edit, :update, :destroy]
+
 
   def index
-
     sort_column = params[:column].presence 
 
     if params[:sort && :direction]
@@ -36,7 +37,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       redirect_to tasks_path, notice: "タスク「#{@task.name}」を登録しました。"
     else
@@ -73,6 +74,14 @@ class TasksController < ApplicationController
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+  end
+
+  def ensure_correct_user
+    @task = Task.find(params[:id])
+    if current_user.id != @task.user.id
+      flash[:notice] = "権限がありません"
+      redirect_to new_session_path
+    end
   end
 
 end
