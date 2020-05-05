@@ -1,3 +1,4 @@
+/ | require "date"
 = form_with model: task, local: true do |f|
   - if @task.errors.any?
     #error_explanation
@@ -14,4 +15,16 @@
   .form-group
     = f.label :description
     = f.text_area :description, rows: 5, class: 'form-control', id: 'task_description'
+  .form-group
+    = f.label :end_date
+    = f.date_field :end_date
+  .form-group
+    = f.label :status
+    = f.select :status, ["未着手","着手中","完了"]
+  .form-group
+    = f.label :priority
+    = f.select :priority, Task.priorities.keys.map {|k| [t("enums.task.priority.#{k}"), k]}
+  br/
   = f.submit nil, class: 'btn btn-primary'
+
+

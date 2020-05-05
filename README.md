@@ -53,7 +53,11 @@ $ heroku open
 |    タスクID     |    string      |    false      |  
 |    name（タイトル）    |    string      |    false      |  
 |   description（タスク詳細 ）	|     text      |    false      |  
-|   ステータス 	|     string     |    false      |  
+|   created_at(登録日時) 	|     datetime     |     false      |  
+|   updated_at(更新日時) 	|     datetime     |     false      |  
+|   end_date(終了期限) 	|     datetime     |    true     |  
+|   status(ステータス) 	|     string     |     true     |  
+|   priority(優先順位)	|     string     |     true     |  
 |   ユーザーID（FK） |     string   |    false      |  
 |   ラベルID（FK）  |     string   |    false      |  
 
