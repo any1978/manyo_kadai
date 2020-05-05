@@ -7,9 +7,14 @@ html
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
   body
-    .container
-    - if flash.notice.present?
-      .alert.alert-success= flash.notice
-      
+    - flash.each do |key, value|
+      = content_tag(:div, value, class: "#{key}")
+    - if logged_in?
+      = link_to "Profile", user_path(current_user.id)
+      = link_to "Logout", session_path(current_user.id), method: :delete
+    - else
+      = link_to "Sign up", new_user_path
+      = link_to "Login", new_session_path
     = yield
