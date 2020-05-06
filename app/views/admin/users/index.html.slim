@@ -16,8 +16,8 @@ table.table.table-hover
         td = user.user_name
         td = user.tasks.size
         / td = user.admin? ? ‘あり’ : ‘なし’
-        td = link_to 'Show', admin_user_path(user)
-        td = link_to 'Edit', edit_admin_user_path(user)
+        td = link_to 'Show', admin_user_path(user.id)
+        td = link_to 'Edit', edit_admin_user_path(user.id)
         td
           / - if current_user.admin? && !current_user?(user)
           = link_to 'Destroy', [:admin, user], data: { confirm: 'Are you sure?' }, method: :delete

@@ -63,7 +63,8 @@ class UsersController < ApplicationController
 
     def ensure_correct_user
       @user = User.find(params[:id])
-      if current_user.id != @user.id
+      if current_user.admin?
+      elsif current_user.id != @user.id
         flash[:notice] = "権限がありません"
         redirect_to tasks_path
       end

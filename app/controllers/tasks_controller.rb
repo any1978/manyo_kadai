@@ -81,6 +81,7 @@ class TasksController < ApplicationController
     if current_user.id != @task.user.id
       flash[:notice] = "権限がありません"
       redirect_to root_path
+    # elsif current_user.id == current_user.admin
     end
   end
 

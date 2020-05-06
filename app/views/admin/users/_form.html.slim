@@ -16,6 +16,6 @@
     = f.label :password_confirmation
     = f.password_field :password_confirmation
     br/
-    = f.submit "Update my account"
+    = f.submit "Update account"
 
-= link_to 'ユーザーページに戻る', user_path(current_user.id)
+= link_to '管理ページに戻る', admin_users_path(current_user.id)
