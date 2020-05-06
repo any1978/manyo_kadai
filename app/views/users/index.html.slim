@@ -1,17 +1,18 @@
-h1 Listing users
+h1 ユーザー管理画面
 
 table
   thead
     tr
+      th ユーザーID
       th Name
-      th
       th
       th
 
   tbody
     - @users.each do |user|
       tr
-        td = user.name
+        td = user.id
+        td = user.user_name
         td = link_to 'Show', user
         td = link_to 'Edit', edit_user_path(user)
         td = link_to 'Destroy', user, data: { confirm: 'Are you sure?' }, method: :delete
@@ -19,3 +20,9 @@ table
 br
 
 = link_to 'New User', new_user_path
+
+
+/ h1 管理画面のユーザー一覧
+/ - @users.each do |user|
+/   = user.id
+/     | \:#{user.name}

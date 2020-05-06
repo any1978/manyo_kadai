@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  before_destroy :do_not_destroy_last_admin
+
   # validation
   validates :user_name, presence: true, length: { maximum: 30 }
   validates :email, presence: true, length: { maximum: 255 },
@@ -9,6 +11,14 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, on: :new
 
   has_secure_password
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
+
+  private
+
+  def do_not_destroy_last_admin
+    if self.admin? && User.where(admin: :true).count == 1
+      throw :abort
+    end
+  end
 
 end

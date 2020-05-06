@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_correct_user, only:[:show, :create, :edit, :update, :destroy]
-
+  before_action :ensure_correct_user, only:[:show, :edit, :update, :destroy]
+  before_action :admin_user, only: :destroy
   # GET /users
   def index
     @users = User.all
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+    User.find(params[:id]).destroy
     redirect_to users_url, notice: 'User was successfully destroyed.'
   end
 
@@ -67,5 +67,9 @@ class UsersController < ApplicationController
         flash[:notice] = "権限がありません"
         redirect_to tasks_path
       end
+    end
+
+    def admin_user
+      redirect_to(root_path) unless current_user.admin?
     end
 end
