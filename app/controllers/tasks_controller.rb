@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only:[:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user
 
   def index
     sort_column = params[:column].presence 
@@ -78,11 +78,13 @@ class TasksController < ApplicationController
 
   def ensure_correct_user
     @task = Task.find(params[:id])
-    if current_user.id != @task.user.id
+    if @current_user_id != @task.user.id
       flash[:notice] = "権限がありません"
       redirect_to root_path
     # elsif current_user.id == current_user.admin
     end
   end
+
+
 
 end

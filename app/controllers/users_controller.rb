@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only:[:show, :edit, :update, :destroy]
-  before_action :admin_user, only:[:show, :edit, :update, :destroy]
-  before_action :authenticate_user, only: [:edit, :update]
+  # before_action :admin_user, only:[:show, :edit, :update, :destroy]
+  before_action :authenticate_user, only:[:create]
   before_action :logged_in_user, only: [:index,:show, :edit, :update, :destroy]
   
   # GET /users
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to @user, notice: 'User was successfully created.'
+      redirect_to user_path, notice: 'User was successfully created.'
     else
       render :new
     end
@@ -69,14 +69,14 @@ class UsersController < ApplicationController
       if current_user.admin?
       elsif current_user.id != @user.id
         flash[:notice] = "権限がありません"
-        redirect_to new_session_path
+        redirect_to tasks_path
       end
     end
 
-    def admin_user
-      redirect_to(root_path) unless current_user.admin?
-      flash[:notice] = "あなたは管理者ではありません"
-    end
+    # def admin_user
+    #   redirect_to(root_path) unless current_user.admin?
+    #   flash[:notice] = "あなたは管理者ではありません"
+    # end
 
     def logged_in_user
       unless logged_in?

@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:create, :show, :edit, :update, :destroy]
-  before_action :admin_user, only: [:create, :destroy, :edit, :update]
+  before_action :admin_user
+  # only: [:index, :create, :destroy, :edit, :update]
   # before_action :ensure_correct_user, only:[:show, :create, :edit, :update, :destroy]
   # before_action :admin_user, only: :destroy
 
@@ -47,7 +48,7 @@ class Admin::UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     if @user.destroy
-    redirect_to admin_users_path, notice: "ユーザー「#{@user.user_name}」を削除しました"
+      redirect_to admin_users_path, notice: "ユーザー「#{@user.user_name}」を削除しました"
     else
       redirect_to admin_users_path, notice: "管理者「#{@user.user_name}」は削除できません"
     end
@@ -66,9 +67,10 @@ class Admin::UsersController < ApplicationController
     end
 
     def admin_user
+      # binding.pry
       if current_user.admin?
       else
-        redirect_to root_path 
+        redirect_to root_path
         flash[:notice] = "あなたは管理者ではありません"
       end
     end
@@ -81,7 +83,4 @@ class Admin::UsersController < ApplicationController
     #   end
     # end
 
-    # def admin_user
-    #   redirect_to(root_path) unless current_user.admin?
-    # end
 end

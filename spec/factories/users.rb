@@ -1,14 +1,14 @@
 FactoryBot.define do
   factory :user do
     id { 1 }
-    name { 'sample' }
+    user_name { 'sample' }
     email { 'sample@example.com' }
     password { '00000000' }
     admin { false }
   end
   factory :admin_user, class: User do
     id { 2 }
-    name { 'admin' }
+    user_name { 'admin' }
     email { 'admin@example.com' }
     password { '00000000' }
     admin { true }

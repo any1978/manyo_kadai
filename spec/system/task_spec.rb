@@ -7,6 +7,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     @task2 = create(:second_task, name: '付け加えた名前2', description: '付け加えたコンテント2', end_date: '2020/05/15', status: '着手中', priority: 'Middle')
     @task3 = create(:second_task, name: '付け加えた名前３', description: '付け加えたコンテント3', end_date: '2020/05/20', status: '着手中', priority: 'Low')
     @task4 = create(:task, name: '付け加えた名前4', description: '付け加えたコンテント4',end_date: '2020/05/25', status: '着手中', priority: 'High')
+    create(:user)
+    create(:task, user: user)
   end
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
