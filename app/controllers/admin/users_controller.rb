@@ -1,7 +1,6 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_user, only: [:create, :show, :edit, :update, :destroy]
-  before_action :admin_user
-  # only: [:index, :create, :destroy, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [:index, :create, :destroy, :edit, :update]
   # before_action :ensure_correct_user, only:[:show, :create, :edit, :update, :destroy]
   # before_action :admin_user, only: :destroy
 
@@ -67,10 +66,9 @@ class Admin::UsersController < ApplicationController
     end
 
     def admin_user
-      # binding.pry
       if current_user.admin?
       else
-        redirect_to root_path
+        redirect_to root_path 
         flash[:notice] = "あなたは管理者ではありません"
       end
     end

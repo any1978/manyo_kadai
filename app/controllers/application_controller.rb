@@ -8,8 +8,17 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
-    if current_user == nil  
+    if current_user == nil
+      flash[:notice] = "ログインしてください"
       redirect_to new_session_path
     end
   end
+  
+  # def logged_in_user
+  #   if  current_user == nil
+  #     # binding.pry ここは通らない
+  #     flash[:notice] = "ログインしてください"
+  #     redirect_to new_session_path
+  #   end
+  # end
 end

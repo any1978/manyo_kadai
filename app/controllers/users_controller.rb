@@ -2,8 +2,10 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only:[:show, :edit, :update, :destroy]
   # before_action :admin_user, only:[:show, :edit, :update, :destroy]
-  before_action :authenticate_user, only:[:create]
-  before_action :logged_in_user, only: [:index,:show, :edit, :update, :destroy]
+  before_action :authenticate_user, only:[:show, :edit, :update, :destroy]
+  # , only:[:create]
+  # before_action :logged_in_user
+  # , only: [:index, :show, :edit, :update, :destroy]
   
   # GET /users
   def index
@@ -12,8 +14,8 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    @user = User.find(params[:id])
-    @user.tasks = @user.tasks.page(params[:page]).per(7)
+    # @user = User.find(params[:id])
+    # @user.tasks = @user.tasks.page(params[:page]).per(7)
   end
 
   # GET /users/new
@@ -28,10 +30,9 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
-
     if @user.save
       session[:user_id] = @user.id
-      redirect_to user_path, notice: 'User was successfully created.'
+      redirect_to user_path(@user.id), notice: 'User was successfully created.'
     else
       render :new
     end
@@ -78,10 +79,11 @@ class UsersController < ApplicationController
     #   flash[:notice] = "あなたは管理者ではありません"
     # end
 
-    def logged_in_user
-      unless logged_in?
-        flash[:notice] = "ログインしてください"
-        redirect_to new_session_path
-      end
-    end
+    # def logged_in_user
+    #   unless logged_in?
+    #     # binding.pry ここは通らない
+    #     flash[:notice] = "ログインしてください"
+    #     redirect_to new_session_path
+    #   end
+    # end
 end
