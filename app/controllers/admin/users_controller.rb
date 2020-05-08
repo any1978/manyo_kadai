@@ -12,7 +12,6 @@ class Admin::UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
-    # @user.tasks = @user.tasks.page(params[:page]).per(7)
   end
 
   # GET /users/new
