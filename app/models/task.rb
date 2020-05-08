@@ -21,7 +21,6 @@ class Task < ApplicationRecord
   }
 
   enum priority: %i[High Middle Low]
-  # enum status: { unknown: 0, 未着手: 1, 着手中: 2, 完了: 3 }
 
 
 end

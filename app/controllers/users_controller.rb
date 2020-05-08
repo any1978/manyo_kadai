@@ -74,16 +74,4 @@ class UsersController < ApplicationController
       end
     end
 
-    # def admin_user
-    #   redirect_to(root_path) unless current_user.admin?
-    #   flash[:notice] = "あなたは管理者ではありません"
-    # end
-
-    # def logged_in_user
-    #   unless logged_in?
-    #     # binding.pry ここは通らない
-    #     flash[:notice] = "ログインしてください"
-    #     redirect_to new_session_path
-    #   end
-    # end
 end

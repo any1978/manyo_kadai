@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def current_user
-    # checks for a User based on the session’s user id that was stored when they logged in, and stores result in an instance variable
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
@@ -14,11 +13,5 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  # def logged_in_user
-  #   if  current_user == nil
-  #     # binding.pry ここは通らない
-  #     flash[:notice] = "ログインしてください"
-  #     redirect_to new_session_path
-  #   end
-  # end
+
 end

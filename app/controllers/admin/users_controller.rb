@@ -1,8 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :admin_user, only: [:index, :create, :destroy, :edit, :update]
-  # before_action :ensure_correct_user, only:[:show, :create, :edit, :update, :destroy]
-  # before_action :admin_user, only: :destroy
+
 
   # GET /users
   def index
@@ -73,12 +72,5 @@ class Admin::UsersController < ApplicationController
       end
     end
 
-    # def ensure_correct_user
-    #   @user = User.find(params[:id])
-    #   if current_user.admin != @user
-    #     flash[:notice] = "権限がありません"
-    #     redirect_to tasks_path
-    #   end
-    # end
 
 end
