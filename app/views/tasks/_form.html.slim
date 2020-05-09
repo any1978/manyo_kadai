@@ -24,6 +24,10 @@
   .form-group
     = f.label :priority
     = f.select :priority, Task.priorities.keys.map {|k| [t("enums.task.priority.#{k}"), k]}
+  .form-group
+    = f.label :name
+    = f.collection_check_boxes(:label_ids, Label.all, :id, :name)
+
   br/
   = f.submit nil, class: 'btn btn-primary'
 
