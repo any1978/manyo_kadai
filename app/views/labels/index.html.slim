@@ -11,7 +11,7 @@ table
   tbody
     - @labels.each do |label|
       tr
-        td = label.name
+        td = label.label_name
         td = link_to 'Show', label
         td = link_to 'Edit', edit_label_path(label)
         td = link_to 'Destroy', label, data: { confirm: 'Are you sure?' }, method: :delete

@@ -1,11 +1,9 @@
 class UsersController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only:[:show, :edit, :update, :destroy]
   # before_action :admin_user, only:[:show, :edit, :update, :destroy]
   before_action :authenticate_user, only:[:show, :edit, :update, :destroy]
-  # , only:[:create]
-  # before_action :logged_in_user
-  # , only: [:index, :show, :edit, :update, :destroy]
   
   # GET /users
   def index
@@ -16,6 +14,13 @@ class UsersController < ApplicationController
   def show
     # @user = User.find(params[:id])
     # @user.tasks = @user.tasks.page(params[:page]).per(7)
+    sort_column = params[:column].presence 
+    if params[:sort && :direction]
+      @user.tasks = @user.tasks.all.order(sort_column + ' ' + sort_direction)
+    else
+      @user.tasks = @user.tasks.all.order(created_at: :desc)
+    end
+
   end
 
   # GET /users/new
@@ -72,6 +77,10 @@ class UsersController < ApplicationController
         flash[:notice] = "権限がありません"
         redirect_to tasks_path
       end
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
     end
 
 end

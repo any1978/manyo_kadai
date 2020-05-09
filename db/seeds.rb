@@ -23,3 +23,5 @@ User.create!(user_name: '管理者',
               password:              password,
               password_confirmation: password)
 end
+
+%W(HTML CSS Ruby Rails PHP Java).each { |a| Label.create(label_name: a) }

@@ -19,9 +19,16 @@ class Task < ApplicationRecord
   scope :get_by_name, ->(name) {
     where("name like ?", "%#{name}%")
   }
+  
   scope :get_by_status, ->(status) {
     where(status: status)
   }
+
+  scope :search_with_label, -> (label) {
+    return if label.blank?
+    joins(:labels).where('labels.id = ?', label)
+  }
+
 
   enum priority: %i[High Middle Low]
 

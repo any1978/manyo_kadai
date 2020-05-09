@@ -53,6 +53,6 @@ class LabelsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def label_params
-      params.require(:label).permit(:name)
+      params.require(:label).permit(:label_name)
     end
 end
