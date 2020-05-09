@@ -1,0 +1,21 @@
+= form_for @user do |f|
+  - if @user.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      ul
+        - @user.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :user_name
+    = f.label :email
+    = f.email_field :email
+    = f.label :password
+    = f.password_field :password
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+    br/
+    = f.submit "Update my account"
+
+= link_to 'ユーザーページに戻る', user_path(current_user.id)

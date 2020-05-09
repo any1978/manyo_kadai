@@ -41,7 +41,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.0.0'
   gem 'factory_bot_rails'
-  gem 'chromedriver-helper'
+  # gem 'chromedriver-helper'
   gem 'launchy'
   gem 'pry-rails'  # rails console(もしくは、rails c)でirbの代わりにpryを使われる
   gem 'pry-doc'    # methodを表示
@@ -75,3 +75,6 @@ gem 'rails-i18n'
 gem 'enum_help'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
+gem 'bcrypt'
+gem 'dotenv-rails'
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'

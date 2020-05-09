@@ -6,6 +6,7 @@ FactoryBot.define do
     description { 'Factoryで作ったデフォルトのコンテント１' }  
     end_date { 'Factoryで作ったデフォルトのDate1' }  
     status { '着手中' } 
+    user
   end
 
   factory :second_task, class: Task do
@@ -13,5 +14,6 @@ FactoryBot.define do
     description { 'Factoryで作ったデフォルトのコンテント２' }
     end_date { 'Factoryで作ったデフォルトのDate2' } 
     status { '完了' } 
+    user
   end
 end
