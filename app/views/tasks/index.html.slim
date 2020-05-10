@@ -53,7 +53,7 @@ table.table.table-hover
     - @tasks.each do |task|
       tr.task_row
         td= task.user.user_name
-        td.task_name= link_to task.name, task
+        td= link_to task.name, task
         td= task.created_at.to_s(:timeform)
         td= task.end_date.to_s(:default)
         td= task.status

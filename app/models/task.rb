@@ -4,7 +4,6 @@ class Task < ApplicationRecord
   has_many :labellings, dependent: :destroy
   has_many :labels, through: :labellings
 
-  
   validates :name, presence: true
   validates :description, presence: true
   validates :end_date, presence: true

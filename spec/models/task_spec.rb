@@ -18,8 +18,8 @@ RSpec.describe 'タスク管理機能', type: :model do
 
   context 'scopeメソッドで検索をした場合' do
     before do
-      create(:task, name: "task1", description: '失敗テスト1', end_date: '2020-05-18 00:00:00 +0900', status: '着手中', priority: 0)
-      create(:second_task, name: "task2", description: '失敗テスト2', end_date: '2020-05-20 00:00:00 +0900', status: '着手中', priority: 0)
+      @task1 = create(:task, name: "task1", description: '失敗テスト1', end_date: '2020-05-18 00:00:00 +0900', status: '着手中', priority: 0)
+      @task2 = create(:second_task, name: "task2", description: '失敗テスト2', end_date: '2020-05-20 00:00:00 +0900', status: '着手中', priority: 0)
       task_list = all('.task_row') 
     end
     it "scopeメソッドでタイトル検索ができる" do
@@ -29,12 +29,21 @@ RSpec.describe 'タスク管理機能', type: :model do
     it "scopeメソッドでステータス検索ができる" do
       expect(Task.get_by_status('着手中').count).to eq 2
     end
-    it "scopeメソッドでタイトルとステータスの両方が検索できる" do
+    it "scopeメソッドでラベル検索ができる" do
+      @label1 = create(:label1)
+      @label2 = create(:label2)
+      Labelling.create(task_id: @task1.id, label_id: @label1.id)
+      Labelling.create(task_id: @task2.id, label_id: @label2.id)
+      expect(Task.search_with_label(@label1).count).to eq 1
+    end
+    it "scopeメソッドでタイトル&ステータス&ラベルの絞り込み検索ができる" do
+      @label1 = create(:label1)
+      @label2 = create(:label2)
+      Labelling.create(task_id: @task1.id, label_id: @label1.id)
+      Labelling.create(task_id: @task2.id, label_id: @label2.id)
       expect(Task.get_by_name('task').count).to eq 2
       expect(Task.get_by_status('着手中').count).to eq 2
+      expect(Task.search_with_label(@label1).count).to eq 1
     end
   end
-
-
-
 end

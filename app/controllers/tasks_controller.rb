@@ -1,4 +1,4 @@
-class TasksController < ApplicationController
+                  class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only:[:show, :edit, :update, :destroy]
