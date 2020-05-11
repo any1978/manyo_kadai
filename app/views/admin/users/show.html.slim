@@ -21,13 +21,13 @@ table.table.table-hover
       th= Task.human_attribute_name(:created_at)
       th
         = Task.human_attribute_name(:end_date)
-        / = sort_asc("end_date")
-        / = sort_desc("end_date")
+        = sort_asc("end_date")
+        = sort_desc("end_date")
       th= Task.human_attribute_name(:status)
       th
         = Task.human_attribute_name(:priority)
-        / = sort_asc("priority")
-        / = sort_desc("priority")
+        = sort_asc("priority")
+        = sort_desc("priority")
 
   tbody
     - @user.tasks.each do |task|

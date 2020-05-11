@@ -11,12 +11,13 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    # sort_column = params[:column].presence 
-    # if params[:sort && :direction]
-    #   @user.tasks = @user.tasks.all.order(sort_column + ' ' + sort_direction)
-    # else
-    #   @user.tasks = @user.tasks.all.order(created_at: :desc)
-    # end
+    sort_column = params[:column]
+    if params[:direction]
+      # binding.pry
+      @tasks = @user.tasks.all.order(sort_column + ' ' + sort_direction)
+    else
+      @tasks = @user.tasks.all.order(created_at: :desc)
+    end
   end
 
   # GET /users/new
@@ -56,26 +57,26 @@ class UsersController < ApplicationController
 
   private
 
-    def set_user
-      @user = User.find(params[:id])
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    def user_params
-      params.require(:user).permit(:user_name, :email, :password,
-                                  :password_confirmation)
-    end
+  def user_params
+    params.require(:user).permit(:user_name, :email, :password,
+                                :password_confirmation)
+  end
 
-    def ensure_correct_user
-      @user = User.find(params[:id])
-      if current_user.admin?
-      elsif current_user.id != @user.id
-        flash[:notice] = "権限がありません"
-        redirect_to tasks_path
-      end
+  def ensure_correct_user
+    @user = User.find(params[:id])
+    if current_user.admin?
+    elsif current_user.id != @user.id
+      flash[:notice] = "権限がありません"
+      redirect_to tasks_path
     end
+  end
 
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
     end
 
 end

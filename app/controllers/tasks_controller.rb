@@ -1,13 +1,13 @@
 class TasksController < ApplicationController
-  helper_method :sort_column, :sort_direction
+  # helper_method :sort_column, :sort_direction
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only:[:show, :edit, :update, :destroy]
-  # binding.pry
   before_action :authenticate_user, only:[:index, :show, :edit, :update, :destroy]
 
   def index
-    sort_column = params[:column].presence
-    if params[:sort && :direction]
+    sort_column = params[:column]
+    # binding.pry
+    if params[:direction]
       @tasks = Task.all.order(sort_column + ' ' + sort_direction)
     else
       @tasks = Task.all.order(created_at: :desc)
@@ -84,7 +84,5 @@ class TasksController < ApplicationController
       redirect_to root_path
     end
   end
-
-
-
+  
 end
