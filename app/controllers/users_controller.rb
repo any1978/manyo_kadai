@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    # binding.pry
     # sort_column = params[:column].presence 
     # if params[:sort && :direction]
     #   @user.tasks = @user.tasks.all.order(sort_column + ' ' + sort_direction)
@@ -56,12 +55,11 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_user
       @user = User.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def user_params
       params.require(:user).permit(:user_name, :email, :password,
                                   :password_confirmation)
