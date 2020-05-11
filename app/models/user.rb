@@ -21,4 +21,5 @@ class User < ApplicationRecord
     end
   end
 
+  enum priority: %i[High Middle Low]
 end

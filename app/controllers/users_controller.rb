@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  helper_method :sort_column, :sort_direction
+  # helper_method :sort_column, :sort_direction
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only:[:show, :edit, :update, :destroy]
-  # before_action :admin_user, only:[:show, :edit, :update, :destroy]
   before_action :authenticate_user, only:[:show, :edit, :update, :destroy]
   
   # GET /users
@@ -12,15 +11,13 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    # @user = User.find(params[:id])
-    # @user.tasks = @user.tasks.page(params[:page]).per(7)
-    sort_column = params[:column].presence 
-    if params[:sort && :direction]
-      @user.tasks = @user.tasks.all.order(sort_column + ' ' + sort_direction)
-    else
-      @user.tasks = @user.tasks.all.order(created_at: :desc)
-    end
-
+    # binding.pry
+    # sort_column = params[:column].presence 
+    # if params[:sort && :direction]
+    #   @user.tasks = @user.tasks.all.order(sort_column + ' ' + sort_direction)
+    # else
+    #   @user.tasks = @user.tasks.all.order(created_at: :desc)
+    # end
   end
 
   # GET /users/new

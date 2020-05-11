@@ -1,4 +1,4 @@
-                  class TasksController < ApplicationController
+class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only:[:show, :edit, :update, :destroy]
@@ -6,8 +6,7 @@
   before_action :authenticate_user, only:[:index, :show, :edit, :update, :destroy]
 
   def index
-    sort_column = params[:column].presence 
-
+    sort_column = params[:column].presence
     if params[:sort && :direction]
       @tasks = Task.all.order(sort_column + ' ' + sort_direction)
     else
