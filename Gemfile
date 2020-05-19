@@ -48,6 +48,11 @@ group :development, :test do
   gem 'pry-byebug' # デバッグを実施(Ruby 2.0以降で動作する)
   gem 'pry-stack_explorer' # スタックをたどれる
   gem 'database_cleaner'
+  gem 'capistrano', '3.6.0' # capistranoのツール一式
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
 end
 
 group :development do
@@ -79,3 +84,6 @@ gem 'kaminari-bootstrap'
 gem 'bcrypt'
 gem 'dotenv-rails'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem 'dotenv-rails' # 開発環境で環境変数を操作するのに必要
+gem 'unicorn' # アプリケーションサーバのunicorn
+gem 'mini_racer', platforms: :ruby # デプロイ時に必要
